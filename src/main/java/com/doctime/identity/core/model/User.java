@@ -1,4 +1,4 @@
-package com.doctime.identity.domain.model;
+package com.doctime.identity.core.model;
 
 public class User {
     private Long id;
@@ -12,6 +12,14 @@ public class User {
 
     public User(Long id, String email, String passwordHash, String firstName, String lastName, String role) {
         this.id = id;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public User(String email, String passwordHash, String firstName, String lastName, String role) {
         this.email = email;
         this.passwordHash = passwordHash;
         this.firstName = firstName;
