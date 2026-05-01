@@ -1,5 +1,7 @@
 package com.doctime.identity.core.services;
 
+import com.doctime.identity.core.exceptions.UserAlreadyExistsException;
+import com.doctime.identity.core.exceptions.UserCreationException;
 import com.doctime.identity.core.model.User;
 import com.doctime.identity.port.inbound.CreateUser;
 import com.doctime.identity.port.inbound.UserCommand;
@@ -16,8 +18,16 @@ public class CreateUserService implements CreateUser {
 
     @Override
     public User createUser(UserCommand command) {
-        User user = new User(command.email(), command.password(), command.firstName(), command.lastName(), command.role());
-        userRepository.save(user);
-        return user;
+        if (this.userRepository.existsByEmail(command.email())) {
+            throw new UserAlreadyExistsException(command.email());
+        }
+        try {
+            User user = new User(command.email(), command.password(), command.firstName(), command.lastName(), command.role());
+            userRepository.save(user);
+            return user;
+        } catch (Exception e) {
+            throw new UserCreationException(e.getMessage());
+        }
+
     }
 }

@@ -18,4 +18,9 @@ public class UserPersistenceAdapter implements UserRepository {
         UserJpaEntity userJpaEntity = new UserJpaEntity(user.getEmail(), user.getPasswordHash(), user.getFirstName(), user.getLastName(), user.getRole());
         this.springDataUserRepository.save(userJpaEntity);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return this.springDataUserRepository.existsByEmail(email);
+    }
 }
