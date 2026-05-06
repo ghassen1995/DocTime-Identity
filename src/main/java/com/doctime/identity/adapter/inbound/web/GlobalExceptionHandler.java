@@ -32,4 +32,10 @@ public class GlobalExceptionHandler {
         ApiError error = new ApiError("INTERNAL_SERVER_ERROR", "An unexpected error occurred", 500);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException exception) {
+        ApiError error = new ApiError("INVALID_INPUT", exception.getMessage(), 400);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }

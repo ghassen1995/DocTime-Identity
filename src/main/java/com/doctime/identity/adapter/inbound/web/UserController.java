@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 new CreateUserResponse(
                         savedUser.getId(),
-                        savedUser.getEmail(),
+                        savedUser.getEmail().value(),
                         savedUser.getFirstName(),
                         savedUser.getLastName())
         );
