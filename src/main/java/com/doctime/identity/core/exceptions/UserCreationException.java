@@ -11,4 +11,5 @@ public class UserCreationException extends RuntimeException{
         super(message);
         this.cause = cause;
     }
+
 }
